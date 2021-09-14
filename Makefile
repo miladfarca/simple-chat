@@ -6,10 +6,10 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.c
 	@mkdir -p $(ODIR)
-	$(CC) -c -o $@ $< $(CFLAGS) -I/usr/local/opt/openssl@1.1/include
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 sc: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS) -lcurses -lpthread -lcrypto -L/usr/local/opt/openssl@1.1/lib
+	$(CC) -o $@ $^ $(CFLAGS) -lcurses -lpthread -lcrypto
 
 clean:
 	rm -f $(ODIR)/*.o
