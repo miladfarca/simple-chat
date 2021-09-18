@@ -73,7 +73,7 @@ void ui_reset_input()
   wrefresh(chat_input_content);
 
   // execute as command or send the message.
-  if (!maybe_run_commands(input))
+  if (!maybe_run_command(input))
   {
     msg_send(input);
   }

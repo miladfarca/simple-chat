@@ -1,3 +1,3 @@
 #include "utils.h"
 
-BOOL maybe_run_commands(char* input);
+BOOL maybe_run_command(char* input);

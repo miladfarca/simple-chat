@@ -3,8 +3,12 @@
 #include <string.h>
 #include <stdio.h>
 #include <time.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <pwd.h>
 #include "ui.h"
 #include "utils.h"
+#include "commands.h"
 
 // globals
 char username[MAX_USER_NAME_LENGTH] = {0};
@@ -18,6 +22,48 @@ void init_env()
 
     // setup key.
     set_key(DEFAULT_KEY);
+
+    // check if user has a .scrc file, use it to reset the settings.
+    maybe_read_scrc();
+}
+
+void maybe_read_scrc()
+{
+    // check if `~/.scrc` exists and user has access to it.
+    const char *homedir;
+    if ((homedir = getenv("HOME")) == NULL)
+    {
+        homedir = getpwuid(getuid())->pw_dir;
+    }
+    char buff[50] = {0};
+    char *file_name = SCRC_FILE_PATH;
+    int homedir_length = strlen(homedir);
+    memcpy(buff, homedir, homedir_length);
+    memcpy(buff + homedir_length, file_name, strlen(file_name));
+    if (access(buff, R_OK) == 0)
+    {
+        FILE *fp;
+        char *line = NULL;
+        size_t len = 0;
+        ssize_t read;
+
+        fp = fopen(buff, "r");
+        if (fp != NULL)
+        {
+            while ((read = getline(&line, &len, fp)) != -1)
+            {
+                char command[20] = {':'};
+                memcpy(command + 1, line, read - 1); // don't read the `\n` char.
+                maybe_run_command(command);
+            }
+
+            fclose(fp);
+            if (line)
+            {
+                free(line);
+            }
+        }
+    }
 }
 
 void set_username_from_sys()

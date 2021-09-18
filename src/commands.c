@@ -3,7 +3,7 @@
 #include <string.h>
 #include "ui.h"
 
-BOOL maybe_run_commands(char *input)
+BOOL maybe_run_command(char *input)
 {
     if (input[0] == ':')
     {
