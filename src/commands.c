@@ -12,6 +12,11 @@ BOOL maybe_run_command(char *input)
         {
             end();
         }
+        // :ref
+        if (strcmp(input + 1, "ref") == 0)
+        {
+            ui_refresh();
+        }
         // :key [new key]
         char key_[4] = {0};
         memcpy(key_, input + 1, 3);

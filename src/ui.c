@@ -98,6 +98,10 @@ char *ui_get_alert_message(enum alert_type type)
   }
   return NULL;
 }
+void ui_refresh()
+{
+  refresh();
+}
 
 void ui_end()
 {
