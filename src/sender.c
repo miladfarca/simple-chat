@@ -37,7 +37,7 @@ void msg_send(char *msg)
     memcpy(raw_data + offset, msg, strlen(msg));
 
     // encrypt the data.
-    // MD and username have fixed sie. msg could be variable.
+    // MD and username have fixed size. msg could be variable.
     int raw_data_length = MAGIC_DATA_LENGTH + MAX_USER_NAME_LENGTH + strlen(msg);
 
     int encrypted_data_length = msg_encrypt((unsigned char *)raw_data, raw_data_length, key, iv,
