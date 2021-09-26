@@ -8,6 +8,10 @@
 
 void msg_send(char *msg)
 {
+    // don't send empty messages
+    if (!*msg)
+        return;
+
     int sock = 0;
     struct sockaddr_in s;
     if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
