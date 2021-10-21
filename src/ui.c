@@ -88,19 +88,27 @@ void ui_reset_input()
   {
     scanf("%" MAX_INPUT_LENGTH_S "[^\n]", input);
     msg_send(input);
-    fflush(stdin); // clear stdin, same as werase, might include \n.
+    getchar(); // there is a dangling `\n` in stdin which we need to get rid of.
+               // fflush(stdin); wont work:
+               // > The fflush function does not flush data out of an input stream; it
+               //    is instead used to push data buffered in an output stream to the destination
   }
   ui_reset_input();
 }
 
 void ui_append_to_chat_room(char *input)
 {
+  // '\n\0' should already be part of the input.
   if (!flag__silent)
   {
     if (flag__process_only)
     {
       printf("%s", input);
-      fflush(stdout); // write what we have to stdout before a recursive call.
+      // Doing a printf without `\n` will not auto flush to stdout: https://stackoverflow.com/q/1716296
+      // but there is a `scanf` coming later which could cause a flush: https://stackoverflow.com/q/66815208/14940626
+      // However, if stdout is redirected with `>` then the terminal is no longer interactive which means
+      // a flush will not happen automatically with scanf and we will need to do it manually.
+      fflush(stdout);
       return;
     }
     waddstr(chat_room_content, input);
