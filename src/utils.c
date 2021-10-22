@@ -68,15 +68,19 @@ void maybe_read_scrc()
 
 void set_username_from_sys()
 {
-    int un = getlogin_r(username, MAX_USER_NAME_LENGTH);
-    if (un < 0)
+    uid_t uid = geteuid();
+    struct passwd *pw = getpwuid(uid);
+    if (pw)
     {
-        srand(time(NULL));
-        int random = (rand() % 100) + 1; // random int between 0 and 100.
-        char random_s[7] = {0};
-        sprintf(random_s, "%d", random);
-        memcpy(username, random_s, sizeof(random_s));
+        memcpy(username, pw->pw_name, MAX_USER_NAME_LENGTH);
+        return;
     }
+    // Set a random username.
+    srand(time(NULL));
+    int random = (rand() % 100) + 1; // random int between 0 and 100.
+    char random_s[7] = {0};
+    sprintf(random_s, "%d", random);
+    memcpy(username, random_s, sizeof(random_s));
 }
 
 void set_username(char *new_username)
