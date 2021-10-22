@@ -12,10 +12,17 @@ BOOL maybe_run_command(char *input)
         {
             end();
         }
+        // :c
+        if (strcmp(input + 1, "c") == 0)
+        {
+            ui_clear_chat_room();
+            return TRUE;
+        }
         // :ref
         if (strcmp(input + 1, "ref") == 0)
         {
             ui_refresh();
+            return TRUE;
         }
         // :key [new key]
         char key_[4] = {0};

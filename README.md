@@ -22,6 +22,7 @@ To enter a command simply initiate your chat with `:` and enter a command from t
 | Command | Action |
 |---|---|
 | :q | Quit |
+| :c | Clear chat room window |
 | :key [new key] | Change your key |
 | :name [new name] | Change your username |
 

@@ -127,6 +127,13 @@ char *ui_get_alert_message(enum alert_type type)
   }
   return NULL;
 }
+
+void ui_clear_chat_room()
+{
+  wclear(chat_room_content);
+  wrefresh(chat_room_content);
+}
+
 void ui_refresh()
 {
   refresh();
