@@ -36,7 +36,6 @@ void init_env()
     maybe_read_scrc();
 
     initialized = TRUE;
-    print_info();
 }
 
 void maybe_read_scrc()

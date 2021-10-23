@@ -23,8 +23,15 @@ To enter a command simply initiate your chat with `:` and enter a command from t
 |---|---|
 | :q | Quit |
 | :c | Clear chat room window |
+| :ref | Refresh chat room window |
+| :info | Print username, address and port|
 | :key [new key] | Change your key |
 | :name [new name] | Change your username |
+| :address [new address] | Change broadcast address |
+| :port [new port] | Change port (only usable with the ~/.scrc file) |
+
+### .scrc file
+You can also place your commands, not including `:`, inside the `~/.scrc` file which will be read during initialization.
 
 ### Build
 Project can be built with `make`.
