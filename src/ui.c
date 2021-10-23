@@ -124,6 +124,14 @@ char *ui_get_alert_message(enum alert_type type)
     return "[key was updated]\n";
   case USERNAME_CHANGED:
     return "[username was updated]\n";
+  case ADDRESS_CHANGED:
+    return "[address was updated]\n";
+  case CHANGE_PAST_INITIALIZATION:
+    return "[cannot change after initialization, use .scrc file instead]\n";
+  case INVALID_INPUT:
+    return "[input was invalid, command is ignored]\n";
+  case SEND_ERROR:
+    return "[an error occurred while sending your message]\n";
   }
   return NULL;
 }

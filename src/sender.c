@@ -2,6 +2,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <string.h>
+#include "ui.h"
 #include "utils.h"
 #include "sender.h"
 #include "aes.h"
@@ -18,8 +19,8 @@ void msg_send(char *msg)
         perror("socket");
 
     s.sin_family = AF_INET;
-    s.sin_addr.s_addr = htonl(INADDR_BROADCAST);
-    s.sin_port = htons(PORT);
+    s.sin_addr.s_addr = htonl(address);
+    s.sin_port = htons(port);
 
     int broadcast_enable = 1;
     if (setsockopt(sock, SOL_SOCKET, SO_BROADCAST, &broadcast_enable, sizeof(broadcast_enable)))
@@ -48,5 +49,6 @@ void msg_send(char *msg)
                                             (unsigned char *)encrypted_data);
 
     if (sendto(sock, encrypted_data, encrypted_data_length, 0, (struct sockaddr *)&s, sizeof(struct sockaddr_in)) < 0)
-        perror("sendto");
+        ui_append_to_chat_room(ui_get_alert_message(SEND_ERROR));
+    // perror("sendto"); TODO enable in debug mode
 }

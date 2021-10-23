@@ -24,8 +24,14 @@ BOOL maybe_run_command(char *input)
             ui_refresh();
             return TRUE;
         }
+        // :info
+        if (strcmp(input + 1, "info") == 0)
+        {
+            print_info();
+            return TRUE;
+        }
         // :key [new key]
-        char key_[4] = {0};
+        char key_[4] = {0}; // 1 extra, strcmp needs to hit a null char.
         memcpy(key_, input + 1, 3);
         if (strcmp(key_, "key") == 0)
         {
@@ -40,6 +46,34 @@ BOOL maybe_run_command(char *input)
         {
             set_username(input + 6);
             ui_append_to_chat_room(ui_get_alert_message(USERNAME_CHANGED));
+            return TRUE;
+        }
+        // :address [new address]
+        char address_[8] = {0};
+        memcpy(address_, input + 1, 7);
+        if (strcmp(address_, "address") == 0)
+        {
+            if (set_address(input + 9))
+            {
+                ui_append_to_chat_room(ui_get_alert_message(ADDRESS_CHANGED));
+                return TRUE;
+            }
+            ui_append_to_chat_room(ui_get_alert_message(INVALID_INPUT));
+            return TRUE;
+        }
+        // :port [new port]
+        char port_[5] = {0};
+        memcpy(port_, input + 1, 4);
+        if (strcmp(port_, "port") == 0)
+        {
+            // This change can only be done before the listener thread starts, hence
+            // can only be done before full initializations.
+            if (!env_initialized())
+            {
+                set_port(input + 6);
+                return TRUE;
+            }
+            ui_append_to_chat_room(ui_get_alert_message(CHANGE_PAST_INITIALIZATION));
             return TRUE;
         }
         return TRUE;

@@ -4,9 +4,12 @@
 enum alert_type
 {
     KEY_CHANGED,
-    USERNAME_CHANGED
+    USERNAME_CHANGED,
+    ADDRESS_CHANGED,
+    CHANGE_PAST_INITIALIZATION,
+    INVALID_INPUT,
+    SEND_ERROR
 };
-
 
 WINDOW *ui_newwin(int height, int width, int start_y, int start_x);
 void ui_init();

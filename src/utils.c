@@ -6,14 +6,23 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <pwd.h>
+#include <arpa/inet.h>
 #include "ui.h"
 #include "utils.h"
 #include "commands.h"
 
 // globals
+BOOL initialized = FALSE;
 char username[MAX_USER_NAME_LENGTH] = {0};
 unsigned char key[KEY_LENGTH] = {0};
 unsigned char iv[IV_LENGTH] = {0}; //TODO
+unsigned int address = ADDRESS;
+unsigned short port = PORT;
+
+BOOL env_initialized()
+{
+    return initialized;
+}
 
 void init_env()
 {
@@ -25,6 +34,9 @@ void init_env()
 
     // check if user has a .scrc file, use it to reset the settings.
     maybe_read_scrc();
+
+    initialized = TRUE;
+    print_info();
 }
 
 void maybe_read_scrc()
@@ -78,7 +90,7 @@ void set_username_from_sys()
     // Set a random username.
     srand(time(NULL));
     int random = (rand() % 100) + 1; // random int between 0 and 100.
-    char random_s[7] = {0};
+    char random_s[4] = {0};          // include extra byte for \0 added by sprintf.
     sprintf(random_s, "%d", random);
     memcpy(username, random_s, sizeof(random_s));
 }
@@ -110,6 +122,43 @@ void set_key(char *new_key)
     }
     memcpy(buffer, new_key, length);
     memcpy(key, buffer, KEY_LENGTH);
+}
+
+BOOL set_address(char *new_address)
+{
+    // convert it to binary format.
+    struct in_addr addr;
+    if (inet_aton(new_address, &addr) == 0)
+    {
+        return FALSE;
+    }
+    // convert to host byte order.
+    address = ntohl(addr.s_addr);
+    return TRUE;
+}
+
+void set_port(char *new_port)
+{
+    port = (unsigned short)atoi(new_port);
+}
+
+void print_info()
+{
+    ui_append_to_chat_room("[username = ");
+    ui_append_to_chat_room(username);
+    ui_append_to_chat_room(", ");
+    ui_append_to_chat_room("address = ");
+    // convert to network order, needed by ntoa.
+    struct in_addr ip_addr;
+    ip_addr.s_addr = htonl(address);
+    ui_append_to_chat_room(inet_ntoa(ip_addr));
+    ui_append_to_chat_room(", ");
+    ui_append_to_chat_room("port = ");
+    // port to string.
+    char port_s[MAX_PORT_LEGNTH + 1] = {0}; // include extra byte for \0 added by sprintf.
+    sprintf(port_s, "%d", PORT);
+    ui_append_to_chat_room(port_s);
+    ui_append_to_chat_room("]\n");
 }
 
 void end()

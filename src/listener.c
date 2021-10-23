@@ -60,7 +60,7 @@ void *msg_listen_thread()
     memset(&s, 0, sizeof(s));
     s.sin_family = AF_INET;
     s.sin_addr.s_addr = htonl(INADDR_ANY);
-    s.sin_port = htons(PORT);
+    s.sin_port = htons(port);
 
     int reuse_port = 1;
     if (setsockopt(sock, SOL_SOCKET, SO_REUSEPORT, &reuse_port, sizeof(reuse_port)) < 0)
