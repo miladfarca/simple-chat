@@ -6,10 +6,16 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.c
 	@mkdir -p $(ODIR)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(CFLAGS) -I/usr/local/opt/openssl@1.1/include
 
 sc: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS) -lcurses -lpthread -lcrypto
+	$(CC) -o $@ $^ $(CFLAGS) -lcurses -lpthread -lcrypto -L/usr/local/opt/openssl@1.1/lib
+
+.PHONY: install
+PREFIX = /usr/local
+install: sc
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
+	cp $< $(DESTDIR)$(PREFIX)/bin/sc
 
 clean:
 	rm -f $(ODIR)/*.o
