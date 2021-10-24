@@ -63,7 +63,9 @@ void maybe_read_scrc()
         {
             while ((read = getline(&line, &len, fp)) != -1)
             {
-                char command[20] = {':'};
+                // big enough for all possible commands.
+                // also append ':' to the beginning.
+                char command[100] = {':'};
                 memcpy(command + 1, line, read - 1); // don't read the `\n` char.
                 maybe_run_command(command);
             }
