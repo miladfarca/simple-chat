@@ -8,14 +8,14 @@ $(ODIR)/%.o: %.c
 	@mkdir -p $(ODIR)
 	$(CC) -c -o $@ $< $(CFLAGS) -I/usr/local/opt/openssl@1.1/include
 
-sc: $(OBJ)
+simple-chat: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) -lcurses -lpthread -lcrypto -L/usr/local/opt/openssl@1.1/lib
 
 .PHONY: install
 PREFIX = /usr/local
-install: sc
+install: simple-chat
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp $< $(DESTDIR)$(PREFIX)/bin/sc
+	cp $< $(DESTDIR)$(PREFIX)/bin/simple-chat
 
 clean:
 	rm -f $(ODIR)/*.o

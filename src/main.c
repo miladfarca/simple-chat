@@ -11,12 +11,12 @@ int main(int argc, char **argv)
     parse_args(argc, argv);
     if (flag__print_version)
     {
-        printf("sc " VERSION "\n");
+        printf("simple-chat " VERSION "\n");
         exit(0);
     }
     else if (flag__print_help)
     {
-        printf("usage sc [options]:\n");
+        printf("usage simple-chat [options]:\n");
         printf("%-20s %s", " --help", "print usage and exit\n");
         printf("%-20s %s", " --process-only", "disables the gui and usage of commands (expect for .scrc)\n");
         printf("%-20s %s", " --silent", "disables all the text output\n");
