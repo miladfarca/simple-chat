@@ -12,7 +12,7 @@ parts:
   simple-chat:
     plugin: make 
     source-type: git
-    source: https://github.com/miladfarca/https://github.com/miladfarca/simple-chat
+    source: https://github.com/miladfarca/simple-chat
     build-packages:
       - gcc
       - make
