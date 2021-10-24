@@ -1,0 +1,20 @@
+name: simple-chat
+version: "0.9.0"
+summary: Simple Chat
+description: |
+  SC (Simple Chat) is a secure and serverless chat application for Unix based platforms.
+  Messages are encrypted and broadcasted to the broadcast address using the UDP protocol. 
+
+confinement: devmode
+base: core18
+
+parts:
+  sc:
+    plugin: make 
+    source-type: git
+    source: https://github.com/miladfarca/sc.git
+    build-packages:
+      - gcc
+      - make
+      - libncurses5-dev
+      - libssl-dev
