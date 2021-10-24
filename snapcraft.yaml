@@ -9,10 +9,10 @@ confinement: devmode
 base: core18
 
 parts:
-  sc:
+  simple-chat:
     plugin: make 
     source-type: git
-    source: https://github.com/miladfarca/sc.git
+    source: https://github.com/miladfarca/https://github.com/miladfarca/simple-chat
     build-packages:
       - gcc
       - make
