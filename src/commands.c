@@ -30,6 +30,12 @@ BOOL maybe_run_command(char *input)
             print_info();
             return TRUE;
         }
+        // :help
+        if (strcmp(input + 1, "help") == 0)
+        {
+            print_help();
+            return TRUE;
+        }
         // :key [new key]
         char key_[4] = {0}; // 1 extra, strcmp needs to hit a null char.
         memcpy(key_, input + 1, 3);

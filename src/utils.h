@@ -43,4 +43,5 @@ void set_key(char *new_key);
 BOOL set_address(char *new_address);
 void set_port(char *new_port);
 void print_info();
+void print_help();
 void end();

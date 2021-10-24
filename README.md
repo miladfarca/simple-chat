@@ -21,14 +21,15 @@ Users wishing to communicate with each other need to use the same key.
 To enter a command simply initiate your chat with `:` and enter a command from this list:
 | Command | Action |
 |---|---|
-| :q | Quit |
+| :address [new address] | Change broadcast address |
 | :c | Clear chat room window |
-| :ref | Refresh chat room window |
+| :help | Print this list |
 | :info | Print username, address and port|
 | :key [new key] | Change your key |
 | :name [new name] | Change your username |
-| :address [new address] | Change broadcast address |
 | :port [new port] | Change port (only usable with the ~/.scrc file) |
+| :q | Quit |
+| :ref | Refresh chat room window |
 
 ### .scrc file
 You can also place your commands, not including `:`, inside the `~/.scrc` file which will be read during initialization.

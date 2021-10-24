@@ -7,12 +7,20 @@
 
 int main(int argc, char **argv)
 {
-    //setup flags
+    // setup and then check for flags.
     parse_args(argc, argv);
-    //if help is needed
-    if (flag__print_help)
+    if (flag__print_version)
     {
-        printf("SC - Simple Chat " VERSION "\n");
+        printf("sc " VERSION "\n");
+        exit(0);
+    }
+    else if (flag__print_help)
+    {
+        printf("usage sc [options]:\n");
+        printf("%-20s %s", " --help", "print usage and exit\n");
+        printf("%-20s %s", " --process-only", "disables the gui and usage of commands (expect for .scrc)\n");
+        printf("%-20s %s", " --silent", "disables all the text output\n");
+        printf("%-20s %s", " --version", "print version and exit\n");
         exit(0);
     }
 

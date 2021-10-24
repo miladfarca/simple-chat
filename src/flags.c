@@ -4,6 +4,7 @@
 #include "flags.h"
 
 int flag__print_help = 0;
+int flag__print_version = 0;
 int flag__process_only = 0; // no gui, no commands.
 int flag__silent = 0;       // no ouput form listener.
 
@@ -15,6 +16,11 @@ void parse_args(int argc, char **argv)
         if (strcmp(argv[i], "--help") == 0)
         {
             flag__print_help = 1;
+            valid_flag = 1;
+        }
+        if (strcmp(argv[i], "--version") == 0)
+        {
+            flag__print_version = 1;
             valid_flag = 1;
         }
         if (strcmp(argv[i], "-p") == 0)

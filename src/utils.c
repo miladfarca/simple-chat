@@ -160,6 +160,21 @@ void print_info()
     ui_append_to_chat_room("]\n");
 }
 
+void print_help()
+{
+    ui_append_to_chat_room("[\n");
+    ui_append_to_chat_room(":address [new address]\tchange broadcast address\n");
+    ui_append_to_chat_room(":c\t\t\tclear chat room window\n");
+    ui_append_to_chat_room(":help\t\t\tprint this list\n");
+    ui_append_to_chat_room(":info\t\t\tprint username, address and port\n");
+    ui_append_to_chat_room(":key [new key]\t\tchange your key\n");
+    ui_append_to_chat_room(":name [new name]\tchange your username\n");
+    ui_append_to_chat_room(":port [new port]\tchange port (only usable with the ~/.scrc file)\n");
+    ui_append_to_chat_room(":q \t\t\tquit\n");
+    ui_append_to_chat_room(":ref\t\t\trefresh chat room window\n");
+    ui_append_to_chat_room("]\n");
+}
+
 void end()
 {
     ui_end();
