@@ -12,10 +12,9 @@ simple-chat: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) -lcurses -lpthread -lcrypto -L/usr/local/opt/openssl@1.1/lib
 
 .PHONY: install
-PREFIX = /usr/local
 install: simple-chat
-	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp $< $(DESTDIR)$(PREFIX)/bin/simple-chat
+	mkdir -p $(DESTDIR)/usr/local/bin/
+	cp $< $(DESTDIR)/usr/local/bin/simple-chat
 
 clean:
 	rm -f $(ODIR)/*.o

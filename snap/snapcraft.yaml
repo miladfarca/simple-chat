@@ -1,12 +1,19 @@
 name: simple-chat
-version: "0.9.0"
+version: "1.0.0"
 summary: Simple Chat
 description: |
   simple-chat is a secure and serverless chat application for Unix based platforms.
   Messages are encrypted and broadcasted to the broadcast address using the UDP protocol. 
+  Any user within the same network is able to read the messages and respond back.
 
-confinement: devmode
-base: core18
+icon: snap/gui/simple-chat.png
+
+base: core20 
+confinement: strict
+
+apps:
+  simple-chat:
+    command: usr/local/bin/simple-chat
 
 parts:
   simple-chat:
@@ -16,5 +23,9 @@ parts:
     build-packages:
       - gcc
       - make
-      - libncurses5-dev
+      - libncurses5-dev 
       - libssl-dev
+
+plugs:
+  simple-chat-network:
+    interface: network
