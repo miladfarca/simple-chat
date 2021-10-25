@@ -1,6 +1,12 @@
 # Simple Chat
 simple-chat is a secure and serverless chat application for Unix based platforms. Messages are encrypted and broadcasted to the broadcast address using the UDP protocol. Any user within the same network is able to read the messages and respond back. Users can only read messages if it was originally encrypted with the same key as theirs, otherwise messages will not appear on their chat room window.
 
+### Installation on Linux
+```
+snap install simple-chat
+```
+https://snapcraft.io/simple-chat
+
 ### Encryption
 All messages are encrypted with `AES-256-CBC` using a default key. Users are
 strongly recommended to reset it to their own key when loading the app.
