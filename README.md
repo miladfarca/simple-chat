@@ -13,6 +13,15 @@ strongly recommended to reset it to their own key when loading the app.
 
 Users wishing to communicate with each other need to use the same key.
 
+### Usage
+```
+simple-chat [options]:
+ --help              print usage and exit
+ --process-only      disables the gui and usage of commands (expect for .scrc)
+ --silent            disables all the text output
+ --version           print version and exit
+```
+
 ### Commands
 To enter a command simply initiate your chat with `:` and enter a command from this list:
 | Command | Action |

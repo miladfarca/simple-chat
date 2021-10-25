@@ -21,6 +21,7 @@ int main(int argc, char **argv)
         printf("%-20s %s", " --process-only", "disables the gui and usage of commands (expect for .scrc)\n");
         printf("%-20s %s", " --silent", "disables all the text output\n");
         printf("%-20s %s", " --version", "print version and exit\n");
+        printf("Use the :help command in gui to see a list of available commands.\n");
         exit(0);
     }
 
