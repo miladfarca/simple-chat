@@ -23,12 +23,12 @@ void parse_args(int argc, char **argv)
             flag__print_version = 1;
             valid_flag = 1;
         }
-        if (strcmp(argv[i], "-p") == 0)
+        if (strcmp(argv[i], "--process-only") == 0)
         {
             flag__process_only = 1;
             valid_flag = 1;
         }
-        if (strcmp(argv[i], "-s") == 0)
+        if (strcmp(argv[i], "--silent") == 0)
         {
             flag__silent = 1;
             valid_flag = 1;
