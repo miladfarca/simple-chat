@@ -1,5 +1,5 @@
 name: simple-chat
-version: "1.0.0"
+version: "1.0.1"
 summary: Simple Chat
 description: |
   simple-chat is a secure and serverless chat application for Unix based platforms.
